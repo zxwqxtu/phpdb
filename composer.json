@@ -1,0 +1,10 @@
+{
+    "name": "zxwqxtu/phpdb",
+    "description": "php db library extensions",
+    "keywords": ["Mongodb", "phpdb", "Mysql"],
+    "homepage": "https://github.com/zxwqxtu/phpdb.git",
+    "type": "library",
+    "autoload": {
+        "psr-4": {"PhpDb\\": "src/"}
+    }
+}
