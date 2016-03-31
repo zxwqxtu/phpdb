@@ -1,19 +1,19 @@
 <?php
 /**
- * Mysql单例模型
- * Mysql连接
+ * PDO单例模型
+ * PDO连接
  *
  * @author by wangqiang <wangqiang@e.hunantv.com>
  */
-namespace PhpDb\Mysql;
+namespace PhpDb\Pdo;
 
 /**
- * Mysql连接
+ * Pdo连接
  *
- * PhpDb\Mysql\PhpMysql
- * PhpDb\Mysql\PhpMysql::getInstance()->connect($config)
+ * PhpDb\Pdo\PhpPdo
+ * PhpDb\Pdo\PhpPdo::getInstance()->connect($config)
  */
-class PhpMysql
+class PhpPdo
 {
     private $_dsns = array();
     private static $_instance = null; 
@@ -41,16 +41,17 @@ class PhpMysql
         return self::$_instance;
     }
     /**
-     * 连接Mysql
+     * 连接Pdo Mysql pgsql
      *
      * @param array  $config 
      * array('host'=>'', 'dbName'=>'', 'user'=>'','pass'=>'')
+     * @param string $driver mysql, pgsql
      *
      * @return \PDO
      */
-    public function connect(array $config = array())
+    public function connect(array $config = array(), $driver='mysql')
     {
-        $dsn = "mysql:dbname={$config['dbName']};host={$config['host']}";
+        $dsn = "{$driver}:dbname={$config['dbName']};host={$config['host']}";
         $md5 = md5($dsn);
 
         $attributes = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
