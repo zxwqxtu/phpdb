@@ -44,12 +44,11 @@ class PhpMongo
     /**
      * 连接mongodb
      *
-     * @param array  $config array('server'=>'', 'options'=>'')
-     * @param string $db     dbName
+     * @param array  $config array('server'=>'', 'options'=>'', 'dbName'=>'')
      *
      * @return MongoClient|MongoDB
      */
-    public function connect(array $config = array(), $db='')
+    public function connect(array $config = array())
     {
         if (empty($config['server'])) {
             throw new \Exception("mongodb connect server fail");
@@ -66,8 +65,8 @@ class PhpMongo
             $this->_conns[$_md5] = new \MongoClient($server, $options);
         }
         
-        if (!empty($db)) {
-            return $this->_conns[$_md5]->selectDB($db);
+        if (!empty($config['dbName'])) {
+            return $this->_conns[$_md5]->selectDB($config['dbName']);
         }
         return $this->_conns[$_md5];
     }
