@@ -52,6 +52,9 @@ class PhpPdo
     public function connect(array $config = array(), $driver='mysql')
     {
         $dsn = "{$driver}:dbname={$config['dbName']};host={$config['host']}";
+        if (!empty($config['port'])) {
+            $dsn .= ";port={$config['port']}";
+        }
         $md5 = md5($dsn);
 
         $attributes = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
