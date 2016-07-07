@@ -57,9 +57,12 @@ class PhpPdo
         }
         $md5 = md5($dsn);
 
-        $attributes = array(\PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION);
+        $attributes = array(
+            \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+            \PDO::ATTR_DEFAULT_FETCH_MODE => \PDO::FETCH_ASSOC
+        );
         if (!empty($config['attributes'])) {
-            $attributes = array_merge($attributes, $config['attributes']);
+            $attributes = $config['attributes'] + $attributes;
         }
 
         if (empty($this->_dsns[$md5])) {
